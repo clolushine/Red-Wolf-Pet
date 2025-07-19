@@ -40,7 +40,7 @@
 
 ### 图例演示 (Demonstration)
 
-![](/red wolf pet sample.gif)
+![red wolf pet sample](/red_wolf_pet_sample.gif)
 
 ### 许可证 (License)
 
