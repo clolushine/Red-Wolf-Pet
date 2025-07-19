@@ -8,4 +8,7 @@
   <ItemGroup>
     <Folder Include="scripts\saves\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.md" />
+  </ItemGroup>
 </Project>
