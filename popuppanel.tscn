@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://yg3d3akkxfg7"]
+
+[ext_resource type="Script" path="res://scripts/objects/PopupPanelTip.cs" id="1_gs5j5"]
+
+[node name="popuppanel" type="PopupPanel"]
+position = Vector2i(0, 38)
+size = Vector2i(296, 31)
+mouse_passthrough = true
+script = ExtResource("1_gs5j5")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 292.0
+offset_bottom = 27.0
+text = "弹药打光了，请稍等片刻等待装弹完成。"
+max_lines_visible = 1

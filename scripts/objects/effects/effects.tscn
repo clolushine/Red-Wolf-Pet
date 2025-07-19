@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6348o1dfwthg"]
+
+[ext_resource type="Script" path="res://scripts/objects/effects/Effects.cs" id="1_l3344"]
+[ext_resource type="AudioStream" uid="uid://dt2mcgfu33kh1" path="res://audio/se/(043.096) Metal Max - See The End Of File In Hex!.ogg" id="2_emvmv"]
+[ext_resource type="Texture2D" uid="uid://bu5vvfbgsyr6s" path="res://sprites/mm1-bigfireboom.png" id="3_4xsfp"]
+[ext_resource type="Script" path="res://scripts/objects/effects/EffectsManager.cs" id="3_db44y"]
+[ext_resource type="Script" path="res://scripts/objects/effects/EffectBigFireBoom.cs" id="5_ilgem"]
+[ext_resource type="Script" path="res://scripts/objects/effects/EffectNone.cs" id="6_0y57e"]
+
+[sub_resource type="Animation" id="Animation_0bfy2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2fbfw"]
+resource_name = "bigfireboom"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.3, 0.4, 0.466667, 0.533333, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t86nn"]
+_data = {
+"RESET": SubResource("Animation_0bfy2"),
+"bigfireboom": SubResource("Animation_2fbfw")
+}
+
+[node name="effects" type="Node2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_l3344")
+BigFireBoomSound = ExtResource("2_emvmv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_4xsfp")
+centered = false
+hframes = 3
+vframes = 3
+region_enabled = true
+region_rect = Rect2(0, 0, 206, 176)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t86nn")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 32
+
+[node name="effectsmanager" type="Node" parent="."]
+script = ExtResource("3_db44y")
+
+[node name="none" type="Node" parent="effectsmanager"]
+script = ExtResource("6_0y57e")
+
+[node name="bigfireboom" type="Node" parent="effectsmanager"]
+script = ExtResource("5_ilgem")

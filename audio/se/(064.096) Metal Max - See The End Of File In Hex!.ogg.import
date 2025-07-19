@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c8qw1hy5n3xsc"
+path="res://.godot/imported/(064.096) Metal Max - See The End Of File In Hex!.ogg-d40f776600086811f60f785480d78f0e.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/se/(064.096) Metal Max - See The End Of File In Hex!.ogg"
+dest_files=["res://.godot/imported/(064.096) Metal Max - See The End Of File In Hex!.ogg-d40f776600086811f60f785480d78f0e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
