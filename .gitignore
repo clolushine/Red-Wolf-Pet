@@ -1,3 +1,32 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+.import/
+export/
+build/
+temp/
+export_presets.cfg
+
+# Godot C# / Mono specific ignores
+.mono/
+mono_assemblies/
+GodotMonoCache/
+*.csproj.user
+*.sln.user
+[Bb]in/
+[Oo]bj/
+
+# IDE specific ignores (Rider, Visual Studio, VS Code)
+.idea/
+.vs/
+*.user
+*.suo
+*.resharper
+riderDebugger/
+.vscode/
+
+# Other common ignores
+*.log
+*.bak
+*.orig
+*.temp
