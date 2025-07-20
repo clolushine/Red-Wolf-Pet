@@ -16,6 +16,7 @@
 #### 工具版本
 - 开发语言：c#
 - godot版本：godot4.3 stable
+- ide: Rider 2024.2
 - 开发计划：<em>该项目是出于学习而制作，未来无开发计划。</em>
 
 ### 法律声明与免责 (Important Legal Notice & Disclaimer)
