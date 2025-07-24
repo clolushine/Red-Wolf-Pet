@@ -5,6 +5,7 @@
 [node name="popuppanel" type="PopupPanel"]
 position = Vector2i(0, 38)
 size = Vector2i(296, 31)
+visible = true
 mouse_passthrough = true
 script = ExtResource("1_gs5j5")
 

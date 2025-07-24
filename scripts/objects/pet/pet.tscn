@@ -616,6 +616,5 @@ script = ExtResource("9_b0x20")
 script = ExtResource("10_pglnq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0.125, 0)
 shape = SubResource("RectangleShape2D_amq7s")

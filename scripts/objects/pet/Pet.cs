@@ -16,8 +16,8 @@ public partial class Pet : CharacterBody2D
 	public int MaxShells { get; set; } = 32; // 最大炮弹数量
 	
 	// 属性相关
-	[Export(PropertyHint.Range,"1,16,1")]
-	public int MoveSpeed { get; set; } = 8; // 移动速度
+	[Export(PropertyHint.Range,"1,32,1")]
+	public int MoveSpeed { get; set; } = 12; // 移动速度
 	
 	public int CurrentShells; // 当前炮弹数量
 
@@ -158,7 +158,7 @@ public partial class Pet : CharacterBody2D
 				// 鼠标右键点击开炮
 				if (GlobalManager.Pet.CurrentShells <= 0)
 				{
-					GlobalManager.ShowWindowTip(default, default);
+					GlobalManager.ShowWindowTip(GetWindow(),default, default);
 				}
 				if (_petStateMachine.GetCurrentState() == _idleState)
 				{
@@ -167,7 +167,6 @@ public partial class Pet : CharacterBody2D
 				
 			}
 		}
-		
 		
 		if (_isDragging && @event is InputEventMouseMotion && canMoveWindow())
 		{
@@ -196,11 +195,13 @@ public partial class Pet : CharacterBody2D
 			float maxY = screenSize.Y - windowSize.Y;
         
 			// 5. 使用 Mathf.Clamp 限制 _currentExactPosition 在有效范围内
-			newWindowPos .X = Mathf.Clamp(newWindowPos.X, minX, maxX);
-			newWindowPos .Y = Mathf.Clamp(newWindowPos.Y, minY, maxY);
+			newWindowPos.X = Mathf.Clamp(newWindowPos.X, minX, maxX);
+			newWindowPos.Y = Mathf.Clamp(newWindowPos.Y, minY, maxY);
+			
+			var newPosition = new Vector2I((int)newWindowPos.X, (int)newWindowPos.Y);
 			
 			// 转换为整数坐标，应用新位置
-			GlobalManager.MoveWindow((int)newWindowPos.X, (int)newWindowPos.Y);
+			GlobalManager.MoveWindow(newPosition);
 			// 更新位置
 			_dragStartPosition = currentPos;
 		}

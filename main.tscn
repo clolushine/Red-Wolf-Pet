@@ -26,3 +26,4 @@ script = ExtResource("3_woro1")
 [node name="effects" parent="effectswindow" instance=ExtResource("4_icy5f")]
 
 [node name="popuppanel" parent="." instance=ExtResource("5_4r7gx")]
+visible = false

@@ -10,6 +10,8 @@ public partial class EffectNone : Effect
 
     public override void Start()
     {
+        // 隐藏窗口
+        SetHideWindow(GetWindow());
     }
     
     public override void End()

@@ -16,9 +16,6 @@ public partial class GlobalManager : Node
 	
 	public static PopupPanelTip PopupPanelTip { get; set; }
 	
-	private static readonly int InitWindowHeight = 108;
-	private static readonly int InitWindowWidth = 108;
-	
 	private static int _audioBusIndex;
 	
 	public override void _Ready()
@@ -42,16 +39,9 @@ public partial class GlobalManager : Node
 		DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.AlwaysOnTop, true);
 	}
 	
-	public static void ReSetWindowSize()
+	public static void MoveWindow(Vector2I position)
 	{
-		DisplayServer.WindowSetSize(new Vector2I(InitWindowWidth,InitWindowHeight));
-		DisplayServer.WindowSetMinSize(new Vector2I(InitWindowWidth,InitWindowHeight));
-	}
-	
-	
-	public static void MoveWindow(int x, int y)
-	{
-		DisplayServer.WindowSetPosition(new Vector2I(x, y));
+		DisplayServer.WindowSetPosition(position);
 	}
 
 	public static void SetAudioMute(bool mute = true)
@@ -68,14 +58,14 @@ public partial class GlobalManager : Node
 		AudioServer.SetBusVolumeDb(_audioBusIndex, dbVolume);
 	}
 	
-	public static void ShowWindowTip(string tip = default, Vector2I position = default)
+	public static void ShowWindowTip(Window window,string tip = default, Vector2I position = default)
 	{
 		if (tip != default) PopupPanelTip.SetLabel(tip);
 		
 		// 获取窗口位置
 		// 获取窗口信息
-		Vector2I windowPos = DisplayServer.WindowGetPosition();
-		Vector2I windowSize = DisplayServer.WindowGetSize();
+		Vector2I windowPos = window.Position;
+		Vector2I windowSize = window.Size;
 
 		Vector2I targetPos;
 		

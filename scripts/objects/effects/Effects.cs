@@ -50,26 +50,7 @@ public partial class Effects : Node2D
 		
 		// 事件监听
 		EventBus.Subscribe<PetStartFireEvent>(OnPetStartFire);
-		
-		// 设置点击穿透点位
-		// SetMousePassthroughPoints();
 	}
-	
-	// private void SetMousePassthroughPoints()
-	// {
-	// 	// 获取全局变换矩阵
-	// 	Transform2D globalTransform = GetGlobalTransform();
-	// 	// 创建覆盖整个窗口的矩形多边形
-	// 	// 转换多边形坐标
-	// 	Vector2[] transformedPoints = new Vector2[_effectPolygon.Polygon.Length];
-	// 	for (var i = 0; i < _effectPolygon.Polygon.Length; i++)
-	// 	{
-	// 		// 应用缩放、旋转和位移
-	// 		transformedPoints[i] = globalTransform * _effectPolygon.Polygon[i];
-	// 	}
-	// 	// 设置点击穿透
-	// 	GetWindow().SetMousePassthroughPolygon(transformedPoints);
-	// }
 	
 	public override void _ExitTree()
 	{
@@ -78,59 +59,9 @@ public partial class Effects : Node2D
 
 	private void OnPetStartFire(PetStartFireEvent e)
 	{
-		
-		ShowEffectWindow();
-		
 		// 爆炸效果
 		_effectsManager.StartEffect(_bigFireBoomEffect);
 	}
-	
-	// 创建完全独立的原生窗口
-	// private void CreateEffectWindow()
-	// {
-	// 	if (_effectsScene == null) return;
-	// 	
-	// 	// 1. 创建新场景实例
-	// 	var subWindow = _effectsScene.Instantiate<Node2D>();
-	//
-	// 	// 计算动画精灵的步长
-	// 	var w = EffectSprite.Texture.GetWidth() / EffectSprite.Vframes;
-	// 	var h = EffectSprite.Texture.GetHeight() / EffectSprite.Hframes;
-	// 	
-	// 	// 标准化方向向量（确保长度为1）
-	// 	Vector2 normalizedDir = GlobalManager.Pet.PetDirection.Normalized();
-	// 	
-	// 	// 计算前方256像素的位置
-	// 	Vector2 windowSize = DisplayServer.WindowGetSize();
-	// 	Vector2 targetPos = DisplayServer.WindowGetPosition() 
-	// 	                    + new Vector2(windowSize.X / 2, windowSize.Y / 2)  // 精灵中心点
-	// 	                    + (normalizedDir * 256f);  // 前方256像素
-	//
-	// 	GD.Print("w:" + w + " h:" + h);
-	// 	GD.Print("w:" + windowSize.X + " h:" + windowSize.Y);
-	// 	
-	// 	// 2. 创建独立窗口
-	// 	var window = new Window()
-	// 	{
-	// 		Size = new Vector2I(w,h),
-	// 		Borderless = true,
-	// 		AlwaysOnTop = true,
-	// 		TransparentBg = true,
-	// 		Unresizable = true,
-	// 		MousePassthrough = true,
-	// 		Position = new Vector2I((int)targetPos.X, (int)targetPos.Y),
-	// 		Mode = Window.ModeEnum.Windowed
-	// 	};
-	//
-	// 	// 3. 设置窗口内容
-	// 	window.CallDeferred("add_child", subWindow);
-	//
-	// 	// 4. 添加到场景树
-	// 	GetTree().Root.CallDeferred("add_child", window);
-	//
-	// 	// 5. 显示设置
-	// 	window.Show();
-	// }
 
 	public AnimationPlayer GetCopyPlayer()
 	{
@@ -143,8 +74,6 @@ public partial class Effects : Node2D
 	
 	private void ShowEffectWindow()
 	{
-		GlobalManager.EffectsWindow.MousePassthroughPolygon = new Vector2[] { };
-		
 		// 计算动画精灵的步长
 		var w = (int)(EffectSprite.Texture.GetWidth() / EffectSprite.Vframes * Scale.X);
 		var h = (int)(EffectSprite.Texture.GetHeight() / EffectSprite.Hframes * Scale.Y);
@@ -189,15 +118,5 @@ public partial class Effects : Node2D
 		// 7. 设置特效窗口的位置
 		GlobalManager.EffectsWindow.SetPosition(
 			new Vector2I((int)topLeftScreenPosition.X, (int)topLeftScreenPosition.Y));
-
-		// // 8. 设置点击穿透
-		// Vector2[] polygon = {
-		// 	new Vector2(topLeftScreenPosition.X, topLeftScreenPosition.Y),
-		// 	new Vector2(topLeftScreenPosition.X + GlobalManager.EffectsWindow.Size.X, topLeftScreenPosition.Y),
-		// 	new Vector2(topLeftScreenPosition.X + GlobalManager.EffectsWindow.Size.X, topLeftScreenPosition.Y + GlobalManager.EffectsWindow.Size.Y),
-		// 	new Vector2(topLeftScreenPosition.X, topLeftScreenPosition.Y + GlobalManager.EffectsWindow.Size.Y)
-		// };
-		//
-		// GlobalManager.EffectsWindow.SetMousePassthroughPolygon(polygon);
 	}
 }

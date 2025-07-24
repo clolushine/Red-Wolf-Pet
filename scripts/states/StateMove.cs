@@ -31,10 +31,10 @@ public partial class StateMove : State
         
         // !!! 关键：_currentExactPosition 在进入移动状态时，只初始化一次 !!!
         // 它会从窗口当前实际的整数位置开始，但之后会以浮点数形式累积
-        _currentExactPosition = (Vector2)DisplayServer.WindowGetPosition();
+        _currentExactPosition = (Vector2)GetWindow().GetPosition();
         
         // 同时初始化 _lastAppliedPosition 为当前窗口的整数位置
-        _lastAppliedPosition = DisplayServer.WindowGetPosition();
+        _lastAppliedPosition = GetWindow().GetPosition();
     }
     
     public override void Exit()
@@ -93,10 +93,10 @@ public partial class StateMove : State
             // 如果你的游戏需要支持多屏幕，这里需要更复杂的逻辑来获取所有屏幕的边界
             int currentScreen = DisplayServer.WindowGetCurrentScreen(); 
             
-            Vector2I screenSize =  DisplayServer.ScreenGetUsableRect(currentScreen).Size; // 1. 获取窗口当前在哪个屏幕
+            Vector2I screenSize = DisplayServer.ScreenGetUsableRect(currentScreen).Size; // 1. 获取窗口当前在哪个屏幕
         
             // 2. 获取宠物窗口的尺寸
-            Vector2I windowSize = DisplayServer.WindowGetSize();
+            Vector2I windowSize = GetWindow().GetSize();
         
             // 3. 计算窗口的最小允许 XY 坐标（通常是 0,0）
             float minX = 0.0f;
@@ -124,7 +124,7 @@ public partial class StateMove : State
             // !!!! 关键：只有当新的目标整数位置与上次应用的整数位置不同时才移动窗口 !!!!
             if (newTargetPosition != _lastAppliedPosition)
             {
-                GlobalManager.MoveWindow(newTargetPosition.X, newTargetPosition.Y);
+                GetWindow().SetPosition(newTargetPosition);
                 _lastAppliedPosition = newTargetPosition; // 更新上次应用的位置
             }
         }

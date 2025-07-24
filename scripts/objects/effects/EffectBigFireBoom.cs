@@ -43,16 +43,6 @@ public partial class EffectBigFireBoom : Effect
         {
             copyPlayer.QueueFree();
             _copyPlayers.Remove(copyPlayer);
-            
-            // 延迟
-            GetTree().ProcessFrame += () =>
-            {
-                if (_copyPlayers.Count == 0 && EffectsManager.GetCurrentEffect() != this)
-                {
-                    // 设置点击穿透，不然该图片区域无法点击
-                    SetMouseThoughWindow(GetWindow());
-                }
-            };
         }));
     }
     
